@@ -31,22 +31,83 @@ body {
     font-family: monospace;
 }
 
-
-.content-area {
-    width: 60%;
-    float: left;
-    margin: 0%;
-}
-
-.content-box {
+#audio-controls {
     background-color: red;
     color: black;
     border: 2px solid black;
     padding: 55px;
     border-radius: 15px;
     margin: 90px;
-    font-family: monospace;   
+    font-family: monospace;  
+    
 }
+
+#quote {
+    text-align: center;
+    color: black;
+}
+
+
+.carousel img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+  }
+  .breed-button {
+    margin: 5px;
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .breed-button:hover {
+    background-color: #0056b3;
+  }
+  #breed-info {
+    display: none;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+  }
+
+
+  table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  }
+  table th, table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+  }
+  table th {
+    background-color: #007BFF;
+    color: white;
+  }
+  table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  table a {
+    color: #007BFF;
+    text-decoration: none;
+  }
+  table a:hover {
+    text-decoration: underline;
+  }
+
+
+
+
+
+
+
 
 #Contact:hover {
     background-color:red;
@@ -72,34 +133,7 @@ button:hover {
     background-color: blue;
 }
 
-.logo {
-    float: right;
-    display: block;
-    width: 75px;
-    margin-top: 15px;
-}
 
-.main-container2 {
-    text-align: center;
-    padding: 20px;
-}
-.game-container {
-    border: 2px solid black;
-    padding: 20px;
-    display: inline-block;
-    background-color: blanchedalmond;
-    
-}
-.result-box {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-}
-.box {
-    border: 2px solid black;
-    padding: 35px;
-    width: 150px;
-}
 button {
     background-color: grey;
     color: white;
