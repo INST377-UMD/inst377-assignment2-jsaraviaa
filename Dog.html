@@ -1,0 +1,121 @@
+<html>
+    <head>
+        <title> INST377 - Assignment 2 </title>
+        <link rel="stylesheet" href="INST377 - Assignment 2 Webpage Layouts.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+        <script src="https://unpkg.com/simple-slider-js@1.0.5/dist/simpleslider.min.js"></script>
+    
+    </head>
+    
+    <style>
+        input[type="text"] {
+            transition: width 0.3s ease;
+            width: 150px;
+        }
+        input[type="text"]:focus {
+            width: 200px;
+        }
+    </style>
+
+    <body>
+        <!-- Header Section -->
+        <header id = "bar">
+            <h1>INST377 - Assignment 2 - Webpage </h1>
+        </header>
+        
+        <!--- Navigation Section -->
+        <nav id = "main-nav">
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Stock.html">Stock</a></li>
+                <li><a href="Dog.html">Dog</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <h1>Doggos:</h1>
+            <div id="dog-carousel" class="carousel"></div>
+        
+            <h2>Dog Breeds</h2>
+            <div id="breed-buttons"></div>
+        
+            <div id="breed-info">
+              <h3 id="breed-name"></h3>
+              <p id="breed-desc"></p>
+              <p><strong>Lifespan:</strong> <span id="breed-life"></span> years</p>
+            </div>
+          </main>
+   
+
+        <div id="audio-controls">
+            <h3>Voice Commands:</h3>
+            <ul>
+              <li>Say "Hello" to see a greeting.</li>
+              <li>Say "Change the color to red/blue/etc" to change background.</li>
+              <li>Say "Navigate to home/stocks/dogs" to switch pages.</li>
+              <li>Say "Load Dog Breed [Breed Name]" to show breed details.</li>
+            </ul>
+            <button onclick="startAnnyang()">Turn On Audio</button>
+            <button onclick="stopAnnyang()">Turn Off Audio</button>
+          </div>
+        
+          <script>
+            // Load carousel images
+            fetch('https://dog.ceo/api/breeds/image/random/10')
+              .then(res => res.json())
+              .then(data => {
+                const carousel = document.getElementById('dog-carousel');
+                data.message.forEach(img => {
+                  const imgEl = document.createElement('img');
+                  imgEl.src = img;
+                  carousel.appendChild(imgEl);
+                });
+                simpleslider.getSlider();
+              });
+        
+            // Load breed buttons
+            fetch('https://api.thedogapi.com/v1/breeds')
+              .then(res => res.json())
+              .then(data => {
+                const container = document.getElementById('breed-buttons');
+                data.forEach(breed => {
+                  const btn = document.createElement('button');
+                  btn.textContent = breed.name;
+                  btn.className = 'breed-button';
+                  btn.onclick = () => showBreed(breed);
+                  container.appendChild(btn);
+                });
+                window.breeds = data; // Save globally for voice command
+              });
+        
+            function showBreed(breed) {
+              document.getElementById('breed-name').textContent = breed.name;
+              document.getElementById('breed-desc').textContent = breed.temperament || 'No description available';
+              document.getElementById('breed-life').textContent = breed.life_span || 'Unknown';
+              document.getElementById('breed-info').style.display = 'block';
+            }
+        
+            const commands = {
+              'hello': () => alert('Hello World'),
+              'change the color to *color': (color) => document.body.style.background = color,
+              'navigate to *page': (page) => window.location.href = page.toLowerCase() + '.html',
+              'load dog breed *breed': (breed) => {
+                const match = window.breeds.find(b => b.name.toLowerCase() === breed.toLowerCase());
+                if (match) showBreed(match);
+              }
+            };
+        
+            function startAnnyang() {
+              if (annyang) {
+                annyang.addCommands(commands);
+                annyang.start();
+              }
+            }
+        
+            function stopAnnyang() {
+              if (annyang) annyang.abort();
+            }
+          </script>
+    <body>
+<html>
+    
